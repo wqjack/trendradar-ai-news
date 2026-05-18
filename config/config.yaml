@@ -127,6 +127,26 @@ rss:
       name: "雅虎财经"
       url: "https://finance.yahoo.com/news/rssindex"
 
+    - id: "venturebeat-ai"
+      name: "VentureBeat AI"
+      url: "https://venturebeat.com/category/ai/feed/"
+
+    - id: "theverge-ai"
+      name: "The Verge AI"
+      url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
+
+    - id: "coindesk"
+      name: "CoinDesk"
+      url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+
+    - id: "cointelegraph"
+      name: "Cointelegraph"
+      url: "https://cointelegraph.com/rss"
+
+    - id: "decrypt"
+      name: "Decrypt"
+      url: "https://decrypt.co/feed"
+
     # 自定义源示例
     # - id: "custom-feed"
     #   name: "自定义源"
