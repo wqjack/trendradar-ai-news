@@ -277,7 +277,7 @@ report:
 # 5) 这里决定“筛选路径”，不决定 AI 模型（模型在 ai 段）
 # ===============================================================
 filter:
-  method: "ai"                     # 可选: keyword | ai
+  method: "keyword"                # 可选: keyword | ai；先用关键词保证 RSS 有内容可推送，AI 继续负责中文总结
 
   # AI 模式标签排序开关（仅 ai 模式生效）
   # true: 按标签优先级排序（来自兴趣描述提取顺序）
@@ -367,7 +367,7 @@ display:
                                       # 开启后将对 RSS 进行关键词分析并在通知中展示
                                       # 关闭后跳过分析，但独立展示区不受影响
 
-    standalone: false                 # 独立展示区（完整热榜/RSS，不受关键词过滤）
+    standalone: true                  # 独立展示区（完整热榜/RSS，不受关键词过滤）
     ai_analysis: true                 # AI 分析区域
 
   # 📋 独立展示区配置
@@ -378,8 +378,8 @@ display:
   # 两者共享此处的平台/RSS 配置，但开关互相独立（可只开 AI 分析、不推送展示）
   standalone:
     platforms: []                     # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
-    rss_feeds: ["x-openai", "x-anthropic", "x-deepmind", "x-nvidia", "x-sam-altman", "x-andrej-karpathy", "x-financialjuice", "x-zerohedge", "x-unusual-whales", "x-vitalik", "x-a16zcrypto", "x-balaji", "x-eric-balchunas"]
-                                      # RSS 源 ID 列表（这里优先纳入 X 来源）
+    rss_feeds: ["x-openai", "x-anthropic", "x-deepmind", "x-nvidia", "x-sam-altman", "x-andrej-karpathy", "x-financialjuice", "x-zerohedge", "x-unusual-whales", "x-vitalik", "x-a16zcrypto", "x-balaji", "x-eric-balchunas", "hacker-news", "yahoo-finance", "venturebeat-ai", "theverge-ai", "coindesk", "cointelegraph", "decrypt"]
+                                      # RSS 源 ID 列表（优先 X；新闻 RSS 兜底，保证有最新内容可推送）
     max_items: 20                     # 每个源最多展示条数（0=不限制）
 
 
