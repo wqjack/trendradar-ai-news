@@ -324,6 +324,7 @@ class NewsAnalyzer:
                 (cfg["NTFY_SERVER_URL"] and cfg["NTFY_TOPIC"]),
                 cfg["BARK_URL"],
                 cfg["SLACK_WEBHOOK_URL"],
+                cfg["DISCORD_WEBHOOK_URL"],
                 cfg["GENERIC_WEBHOOK_URL"],
             ]
         )
@@ -1903,6 +1904,7 @@ def _run_doctor(config_path: Optional[str] = None) -> bool:
             ("WEWORK_WEBHOOK_URL", "企业微信"),
             ("BARK_URL", "Bark"),
             ("SLACK_WEBHOOK_URL", "Slack"),
+            ("DISCORD_WEBHOOK_URL", "Discord"),
             ("GENERIC_WEBHOOK_URL", "通用Webhook"),
         ]:
             values = parse_multi_account_config(config.get(key, ""))
@@ -2066,6 +2068,7 @@ def _run_test_notification(config: Dict) -> bool:
                 (config.get("NTFY_SERVER_URL") and config.get("NTFY_TOPIC")),
                 config.get("BARK_URL"),
                 config.get("SLACK_WEBHOOK_URL"),
+                config.get("DISCORD_WEBHOOK_URL"),
                 config.get("GENERIC_WEBHOOK_URL"),
             ]
         )

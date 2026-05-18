@@ -347,8 +347,11 @@ notification:
     slack:
       webhook_url: ""                 # Slack Incoming Webhook URL
 
+    discord:
+      webhook_url: ""                 # Discord Webhook URL
+
     generic_webhook:
-      webhook_url: ""                 # 通用 Webhook URL（支持 Discord、Matrix、IFTTT 等）
+      webhook_url: ""                 # 通用 Webhook URL（支持 Matrix、IFTTT 等）
       payload_template: ""            # JSON 模板，支持 {title} 和 {content} 占位符
                                       # 示例：{"content": "{content}"}
                                       # 留空则使用默认格式：{"title": "{title}", "content": "{content}"}
@@ -592,5 +595,6 @@ advanced:
     feishu: 30000
     bark: 4000
     slack: 4000
+    discord: 1900
   batch_send_interval: 3              # 批次发送间隔（秒）
   feishu_message_separator: "━━━━━━━━━━━━━━━━"

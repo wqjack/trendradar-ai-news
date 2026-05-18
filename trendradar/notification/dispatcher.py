@@ -24,6 +24,7 @@ from trendradar.core.config import (
 from .senders import (
     send_to_bark,
     send_to_dingtalk,
+    send_to_discord,
     send_to_email,
     send_to_feishu,
     send_to_ntfy,
@@ -310,6 +311,13 @@ class NotificationDispatcher:
         # Slack
         if self.config.get("SLACK_WEBHOOK_URL"):
             results["slack"] = self._send_slack(
+                report_data, report_type, update_info, proxy_url, mode, rss_items, rss_new_items,
+                ai_analysis, display_regions, standalone_data
+            )
+
+        # Discord
+        if self.config.get("DISCORD_WEBHOOK_URL"):
+            results["discord"] = self._send_discord(
                 report_data, report_type, update_info, proxy_url, mode, rss_items, rss_new_items,
                 ai_analysis, display_regions, standalone_data
             )
@@ -779,6 +787,46 @@ class NotificationDispatcher:
 
         return any(results) if results else False
 
+    def _send_discord(
+        self,
+        report_data: Dict,
+        report_type: str,
+        update_info: Optional[Dict],
+        proxy_url: Optional[str],
+        mode: str,
+        rss_items: Optional[List[Dict]] = None,
+        rss_new_items: Optional[List[Dict]] = None,
+        ai_analysis: Optional[AIAnalysisResult] = None,
+        display_regions: Optional[Dict] = None,
+        standalone_data: Optional[Dict] = None,
+    ) -> bool:
+        """发送到 Discord（多账号，支持热榜+RSS合并+AI分析+独立展示区）"""
+        rd, ri, rn, ai, sd = self._apply_display_regions(
+            report_data, display_regions, rss_items, rss_new_items, ai_analysis, standalone_data
+        )
+
+        return self._send_to_multi_accounts(
+            channel_name="Discord",
+            config_value=self.config["DISCORD_WEBHOOK_URL"],
+            send_func=lambda url, account_label: send_to_discord(
+                webhook_url=url,
+                report_data=rd,
+                report_type=report_type,
+                update_info=update_info,
+                proxy_url=proxy_url,
+                mode=mode,
+                account_label=account_label,
+                batch_size=self.config.get("DISCORD_BATCH_SIZE", 1900),
+                batch_interval=self.config.get("BATCH_SEND_INTERVAL", 1.0),
+                split_content_func=self.split_content_func,
+                rss_items=ri,
+                rss_new_items=rn,
+                ai_analysis=ai,
+                display_regions=display_regions or {},
+                standalone_data=sd,
+            ),
+        )
+
     def _send_email(
         self,
         report_type: str,
@@ -799,4 +847,3 @@ class NotificationDispatcher:
             custom_smtp_port=self.config.get("EMAIL_SMTP_PORT", ""),
             get_time_func=self.get_time_func,
         )
-

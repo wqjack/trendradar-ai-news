@@ -1026,7 +1026,7 @@ No longer controlled by platform algorithms, TrendRadar reorganizes all trending
 
 ### **Multi-Channel Multi-Account Push**
 
-Supports **WeWork** (+ WeChat push solution), **Feishu**, **DingTalk**, **Telegram**, **Email**, **ntfy**, **Bark**, **Slack**, **Generic Webhook** (connect to Discord, IFTTT, or any platform) — messages delivered directly to phone and email.
+Supports **WeWork** (+ WeChat push solution), **Feishu**, **DingTalk**, **Telegram**, **Email**, **ntfy**, **Bark**, **Slack**, **Discord**, **Generic Webhook** (connect to Matrix, IFTTT, or any platform) — messages delivered directly to phone and email.
 
 > 💡 For detailed configuration, see [Configuration Guide - Multi-Account Push Configuration](#10-multiple-account-push-configuration)
 
@@ -1774,7 +1774,7 @@ Slack is a team collaboration tool, Incoming Webhooks can push messages to Slack
 </details>
 
 <details>
-<summary>👉 Click to expand: <strong>Generic Webhook Push</strong> (Supports Discord, Matrix, IFTTT, etc.)</summary>
+<summary>👉 Click to expand: <strong>Discord / Generic Webhook Push</strong></summary>
 <br>
 
 **GitHub Secret Configuration (⚠️ Name must be exact):**
@@ -1786,30 +1786,27 @@ Slack is a team collaboration tool, Incoming Webhooks can push messages to Slack
 
 <br>
 
-**Generic Webhook Introduction:**
-
-Generic Webhook supports any platform that accepts HTTP POST requests, including but not limited to:
-- **Discord**: Push to channels via Webhook
-- **Matrix**: Push via Webhook bridge
-- **IFTTT**: Trigger automation workflows
-- **Custom Services**: Any custom service supporting Webhooks
-
-**Configuration Examples:**
-
 ### Discord Configuration
 
 1. **Get Webhook URL**:
    - Go to Discord Server Settings → Integrations → Webhooks
    - Create new Webhook, copy URL
 
-2. **Configure Template**:
-   ```json
-   {"content": "{content}"}
-   ```
+2. **GitHub Secret Configuration**:
+   - `DISCORD_WEBHOOK_URL`: Discord Webhook URL
 
-3. **GitHub Secret Configuration**:
-   - `GENERIC_WEBHOOK_URL`: Discord Webhook URL
-   - `GENERIC_WEBHOOK_TEMPLATE`: `{"content": "{content}"}`
+3. **Docker / Local Configuration**:
+   - Docker: set `DISCORD_WEBHOOK_URL` in `docker/.env`
+   - Local: set `notification.channels.discord.webhook_url` in `config/config.yaml`
+
+**Generic Webhook Introduction:**
+
+Generic Webhook supports any platform that accepts HTTP POST requests, including but not limited to:
+- **Matrix**: Push via Webhook bridge
+- **IFTTT**: Trigger automation workflows
+- **Custom Services**: Any custom service supporting Webhooks
+
+**Configuration Examples:**
 
 ### Custom Templates
 
@@ -1821,9 +1818,6 @@ Templates support two placeholders:
 ```json
 # Default format (used when empty)
 {"title": "{title}", "content": "{content}"}
-
-# Discord format
-{"content": "{content}"}
 
 # Custom format
 {"text": "{content}", "username": "TrendRadar"}

@@ -38,6 +38,8 @@ services:
       - BARK_URL=${BARK_URL:-}
       # Slack配置
       - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL:-}
+      # Discord配置
+      - DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL:-}
       # 通用Webhook配置
       - GENERIC_WEBHOOK_URL=${GENERIC_WEBHOOK_URL:-}
       - GENERIC_WEBHOOK_TEMPLATE=${GENERIC_WEBHOOK_TEMPLATE:-}

@@ -427,7 +427,7 @@
 - **排版升级**：重新设计并统一各渠道统计头部，强化区块组织，消息层次一目了然
 - **配置简化**：优化飞书等通知渠道的配置逻辑，上手更简单
 - **热度趋势箭头**：新增 🔺(上升)、🔻(下降)、➖(持平) 趋势标识，直观展示热度变化
-- **通用 Webhook**：支持自定义 Webhook URL 和 JSON 模板，轻松适配 Discord、Matrix、IFTTT 等任意平台
+- **Discord 推送**：新增专用 Discord Webhook 配置；通用 Webhook 继续支持 Matrix、IFTTT 等任意平台
 
 **🔧 配置优化**
 
@@ -1081,7 +1081,7 @@ ai_filter:
 
 ### **多渠道多账号推送**
 
-支持**企业微信**(+ 微信推送方案)、**飞书**、**钉钉**、**Telegram**、**邮件**、**ntfy**、**Bark**、**Slack**、**通用 Webhook**（可对接 Discord、IFTTT 等任意平台），消息直达手机和邮箱
+支持**企业微信**(+ 微信推送方案)、**飞书**、**钉钉**、**Telegram**、**邮件**、**ntfy**、**Bark**、**Slack**、**Discord**、**通用 Webhook**（可对接 Matrix、IFTTT 等任意平台），消息直达手机和邮箱
 
 > 💡 详细配置教程见 [推送到多个群/设备](#10-推送到多个群设备)
 
@@ -1828,7 +1828,7 @@ ai_translation:
    </details>
 
    <details>
-   <summary>👉 点击展开：<strong>通用 Webhook 推送</strong>（支持 Discord、Matrix、IFTTT 等）</summary>
+   <summary>👉 点击展开：<strong>Discord / 通用 Webhook 推送</strong></summary>
    <br>
 
    **GitHub Secret 配置（⚠️ Name 名称必须严格一致）：**
@@ -1840,30 +1840,27 @@ ai_translation:
 
    <br>
 
-   **通用 Webhook 简介：**
-
-   通用 Webhook 支持任意接受 HTTP POST 请求的平台，包括但不限于：
-   - **Discord**：通过 Webhook 推送到频道
-   - **Matrix**：通过 Webhook 桥接推送
-   - **IFTTT**：触发自动化流程
-   - **自建服务**：任何支持 Webhook 的自定义服务
-
-   **配置示例：**
-
    ### Discord 配置
 
    1. **获取 Webhook URL**：
       - 进入 Discord 服务器设置 → 整合 → Webhooks
       - 创建新 Webhook，复制 URL
 
-   2. **配置模板**：
-      ```json
-      {"content": "{content}"}
-      ```
+   2. **GitHub Secret 配置**：
+      - `DISCORD_WEBHOOK_URL`：Discord Webhook URL
 
-   3. **GitHub Secret 配置**：
-      - `GENERIC_WEBHOOK_URL`：Discord Webhook URL
-      - `GENERIC_WEBHOOK_TEMPLATE`：`{"content": "{content}"}`
+   3. **Docker / 本地配置**：
+      - Docker：在 `docker/.env` 填写 `DISCORD_WEBHOOK_URL`
+      - 本地：可在 `config/config.yaml` 的 `notification.channels.discord.webhook_url` 填写
+
+   ### 通用 Webhook 简介
+
+   通用 Webhook 支持任意接受 HTTP POST 请求的平台，包括但不限于：
+   - **Matrix**：通过 Webhook 桥接推送
+   - **IFTTT**：触发自动化流程
+   - **自建服务**：任何支持 Webhook 的自定义服务
+
+   **配置示例：**
 
    ### 自定义模板
 
@@ -1875,9 +1872,6 @@ ai_translation:
    ```json
    # 默认格式（留空时使用）
    {"title": "{title}", "content": "{content}"}
-
-   # Discord 格式
-   {"content": "{content}"}
 
    # 自定义格式
    {"text": "{content}", "username": "TrendRadar"}

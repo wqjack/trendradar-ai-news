@@ -295,6 +295,7 @@ def show_config():
         "NTFY_TOKEN",
         "BARK_URL",
         "SLACK_WEBHOOK_URL",
+        "DISCORD_WEBHOOK_URL",
         # AI 分析配置
         "AI_ANALYSIS_ENABLED",
         "AI_API_KEY",
