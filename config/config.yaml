@@ -192,6 +192,63 @@ rss:
       url: "https://twiiit.com/EricBalchunas/rss"
       max_items: 20
 
+    # 中文 / 华语 X feeds. These are best-effort bridge feeds; replace URLs
+    # with stable paid RSS or your own RSSHub/X API feed if public bridges fail.
+    - id: "x-cn-ai-dotey"
+      name: "X 中文 AI - 宝玉"
+      url: "https://twiiit.com/dotey/rss"
+      max_items: 15
+
+    - id: "x-cn-ai-op7418"
+      name: "X 中文 AI - 歸藏"
+      url: "https://twiiit.com/op7418/rss"
+      max_items: 15
+
+    - id: "x-cn-crypto-wublockchain"
+      name: "X 中文 Crypto - 吴说"
+      url: "https://twiiit.com/WuBlockchain/rss"
+      max_items: 15
+
+    - id: "x-cn-crypto-panews"
+      name: "X 中文 Crypto - PANews"
+      url: "https://twiiit.com/PANewsCN/rss"
+      max_items: 15
+
+    - id: "x-cn-crypto-foresight"
+      name: "X 中文 Crypto - Foresight News"
+      url: "https://twiiit.com/Foresight_News/rss"
+      max_items: 15
+
+    - id: "x-cn-crypto-blockbeats"
+      name: "X 中文 Crypto - BlockBeats"
+      url: "https://twiiit.com/BlockBeatsAsia/rss"
+      max_items: 15
+
+    - id: "x-cn-crypto-techflow"
+      name: "X 中文 Crypto - TechFlow"
+      url: "https://twiiit.com/TechFlowPost/rss"
+      max_items: 15
+
+    - id: "x-cn-crypto-odaily"
+      name: "X 中文 Crypto - Odaily"
+      url: "https://twiiit.com/OdailyChina/rss"
+      max_items: 15
+
+    - id: "x-cn-finance-wallstreetcn"
+      name: "X 中文 Finance - 华尔街见闻"
+      url: "https://twiiit.com/wallstreetcn/rss"
+      max_items: 15
+
+    - id: "x-cn-finance-ftchinese"
+      name: "X 中文 Finance - FT 中文网"
+      url: "https://twiiit.com/FTChinese/rss"
+      max_items: 15
+
+    - id: "x-cn-finance-yicai"
+      name: "X 中文 Finance - 第一财经"
+      url: "https://twiiit.com/YicaiGlobal/rss"
+      max_items: 15
+
     - id: "hacker-news"
       name: "Hacker News"
       url: "https://hnrss.org/frontpage"
@@ -378,7 +435,41 @@ display:
   # 两者共享此处的平台/RSS 配置，但开关互相独立（可只开 AI 分析、不推送展示）
   standalone:
     platforms: []                     # 热榜平台 ID 列表（如 ["zhihu", "weibo"]）
-    rss_feeds: ["x-openai", "x-anthropic", "x-deepmind", "x-nvidia", "x-sam-altman", "x-andrej-karpathy", "x-financialjuice", "x-zerohedge", "x-unusual-whales", "x-vitalik", "x-a16zcrypto", "x-balaji", "x-eric-balchunas", "hacker-news", "yahoo-finance", "venturebeat-ai", "theverge-ai", "coindesk", "cointelegraph", "decrypt"]
+    rss_feeds:
+      # X global
+      - "x-openai"
+      - "x-anthropic"
+      - "x-deepmind"
+      - "x-nvidia"
+      - "x-sam-altman"
+      - "x-andrej-karpathy"
+      - "x-financialjuice"
+      - "x-zerohedge"
+      - "x-unusual-whales"
+      - "x-vitalik"
+      - "x-a16zcrypto"
+      - "x-balaji"
+      - "x-eric-balchunas"
+      # X Chinese
+      - "x-cn-ai-dotey"
+      - "x-cn-ai-op7418"
+      - "x-cn-crypto-wublockchain"
+      - "x-cn-crypto-panews"
+      - "x-cn-crypto-foresight"
+      - "x-cn-crypto-blockbeats"
+      - "x-cn-crypto-techflow"
+      - "x-cn-crypto-odaily"
+      - "x-cn-finance-wallstreetcn"
+      - "x-cn-finance-ftchinese"
+      - "x-cn-finance-yicai"
+      # Stable RSS fallback
+      - "hacker-news"
+      - "yahoo-finance"
+      - "venturebeat-ai"
+      - "theverge-ai"
+      - "coindesk"
+      - "cointelegraph"
+      - "decrypt"
                                       # RSS 源 ID 列表（优先 X；新闻 RSS 兜底，保证有最新内容可推送）
     max_items: 20                     # 每个源最多展示条数（0=不限制）
 
